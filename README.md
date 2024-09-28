@@ -1,1 +1,1 @@
-# Custom whois and dns checker
+# Custom whois and dns SERVER checker
