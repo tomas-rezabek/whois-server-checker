@@ -1,31 +1,38 @@
     <h2>Vysvětlivka</h2>
     <p>Všechny <span class="green">ZELENÉ</span> hodnoty patří Českému hostingu a všechny <span class="red">ČERVENÉ</span> jsou cizí.</p>
-    <h3>Výsledek pro doménu: <span class="yellow"><strong>minecraft.cz</strong></span></h3>
-<small class=pokusy>Počet WHOIS pokusů: #1</small>
+    <h3>Výsledek pro doménu: <span class="yellow"><strong>seznam.cz</strong></span></h3>
     <div class="container">
         <div class="row">
             <div class="col-sm">
                 <p><strong>TLD domény:</strong> cz</p>
-                <p><strong>DNSSEC:</strong> OFF</p>
-                <p><strong>Vlastník domény:</strong> POHO</p>
+                <p><strong>DNSSEC:</strong> <span class=green>ON</span></p>
+                <p><strong>Vlastník domény:</strong> SEZNAM-CZ-AS</p>
                 <p><strong>Registrátor kontaktu:</strong> REG-MOJEID</p>
-                <p><strong>Jméno a příjmení vlastníka:</strong> Ondřej Pohorský</p>
-                <p><strong>Registrátor domény:</strong> <span class=red>REG-GRANSY</span></p>
-                <p><strong>Registrováno:</strong> 20.11.2019 15:00:18</p>
-                <p><strong>Expiruje:</strong> 20.11.2025 - <span class=green>OK</span></p>
+                <p><strong>Jméno a příjmení vlastníka:</strong> Pavel Zima</p>
+                <p><strong>Registrátor domény:</strong> <span class=red>REG-SEZNAM</span></p>
+                <p><strong>Registrováno:</strong> 07.10.1996 02:00:00</p>
+                <p><strong>Expiruje:</strong> 29.10.2025 - <span class=green>OK</span></p>
             </div>
 
 <div class=col-sm><h3>Nameservery:</h3>
-<p class=red>ns.vas-hosting.eu.</p>
-<p class=red>ns.vas-hosting.cz.</p>
-<p class=red>ns.vas-hosting.com.</p>
+<p class=red>ams.seznam.cz.</p>
+<p class=red>ans.seznam.cz.</p>
 <h3>A Záznamy:</h3>
-<p class=red>46.234.112.73 <small>- Vlastník IP nerozpoznán</small></p>
+<p class=red>77.75.77.222 <small>- Vlastník IP nerozpoznán</small></p>
+<p class=red>77.75.79.222 <small>- Vlastník IP nerozpoznán</small></p>
 <h3>AAAA Záznamy (IPv6):</h3>
-<p class=red>2a01:28:ca:112::1:849</p>
+<p class=red>2a02:598:2::1222</p>
+<p class=red>2a02:598:a::79:222</p>
 </div><div class=col-sm><h3>TXT Záznamy:</h3>
-<p>"v=spf1 a mx ?all"</p>
+<p>"v=spf1 mx ip4:77.75.78.0/23 ip4:77.75.76.0/23 ip6:2a02:598::/32 ?all"</p>
+
+<p>"facebook-domain-verification=hp0jkbs2ikx5c9hv3r0cwcyvi2c2jm"</p>
+
+<p>"google-site-verification=e3xWgDmkjVzej4PsMZgvtPhUiJLFAK5rdx-zdmeBYjg"</p>
+
+<p>"google-site-verification=v2WaAYaKuekbWHJu29R0b1IbBY2-pInEXYWbh_1_V2M"</p>
 
 <h3>MX Záznamy (Pošta):</h3>
-<p class=red>bur02.vas-server.cz.</p>
+<p class=red>mx2.seznam.cz.</p>
+<p class=red>mx1.seznam.cz.</p>
 </div></div>
