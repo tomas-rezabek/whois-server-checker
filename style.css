@@ -1,0 +1,51 @@
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 20px;
+	color: #fff;
+}
+
+p {
+  color: #fff;
+}
+.red {
+	color: red;
+	font-weight: bold;
+}
+
+.green {
+	color: green;
+	font-weight: bold;
+}
+
+.col-sm {
+  background-color: black;
+  padding: 1em;
+  border: 2px solid #f7f7f7;
+  margin: 1em;
+}
+input[type="text"], input[type="submit"] {
+  padding: 0.5em;
+  border: 0;
+}
+.pokusy {
+  display: none;
+}
+.yellow {
+  color: yellow;
+}
+
+#loading {
+    position: fixed; /* Position it on the screen */
+    top: 50%; /* Center it vertically */
+    left: 50%; /* Center it horizontally */
+    transform: translate(-50%, -50%); /* Adjust positioning */
+    background-color: #fff; /* Slightly transparent background */
+    border: 2px solid black;
+    padding: 2em;
+    z-index: 1000; /* Ensure it's above other content */
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    display: none; /* Initially hidden */
+    color: #000;
+}

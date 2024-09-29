@@ -1,14 +1,5 @@
+\
 #!/bin/bash
-LOG='/var/www/html/checker/logs/check.log'
-. /var/www/html/checker/config/domena.cfg
-
-# Color variables
-GREEN='\033[0;32m'
-RED='\033[0;31m'
-BLUE='\033[0;34m'
-LBLUE='\033[01;34m'
-YELLOW='\033[1;33m'
-NC='\033[0m' # No Color
 
 #Udaje Ceskeho hostingu
 ch_registrator="REG-THINLINE"
@@ -16,8 +7,12 @@ ch_nameservery=("ns1.thinline.cz." "ns2.thinline.cz." "ns3.cesky-hosting.eu.")
 ch_wildcard="91.239.200." #wildcard pattern
 ch_ipv6_wildcard="2001:67c:e94:0:1:5bef:"
 ch_mx=("mx1a10.thinline.cz." "mx1b10.thinline.cz." "mx1c10.thinline.cz." "mx1d10.thinline.cz." "mx1a20.thinline.cz." "mx1b20.thinline.cz." "mx1c20.thinline.cz.")
-domain=$DOMENA
-
+domain=$1
+LOG=$2
+# Check if the log file path is provided, else use a default
+if [ -z "$LOG" ]; then
+    LOG='./logs/check.log'
+fi
 
 highlight_if_match() {
    local value=$(echo "$1" | xargs)
@@ -25,30 +20,31 @@ highlight_if_match() {
    local wildcard=$3
 
    if [[ "$value" == "$expected" ]]; then
-	echo -e "${GREEN}$value${NC}"
+	echo -e "<span class="green">$value</span>"
    else
-	echo -e "${RED}$value${NC}" # red if not match, cizi
+	echo -e "<span class="red">$value</span>" # red if not match, cizi
    fi
 }
 
 # Function to fetch Whois info (registrant, expiration date, etc.)
 fetch_whois() {
-	echo -e "${YELLOW} === Vysvětlivka === "
-	echo -e "Všechny ${GREEN}ZELENÉ ${YELLOW}hodnoty patří Českému hostingu a všechny ${RED}ČERVENÉ ${YELLOW}jsou cizí."
-    echo -e "Blízká expirace se kontroluje v následujících 14ti dnech."
-    echo -e "${LBLUE}WHOIS data pro doménu: ${domain}${NC}"
-    retries=5 # počet pokusů
-    delay=7   # delay čekání
+    cat<<EOF
+    <h2>Vysvětlivka</h2>
+    <p>Všechny <span class="green">ZELENÉ</span> hodnoty patří Českému hostingu a všechny <span class="red">ČERVENÉ</span> jsou cizí.</p>
+    <h3>Výsledek pro doménu: <span class="yellow"><strong>$domain</strong></span></h3>
+EOF
+
+    retries=6 # počet pokusů
+    delay=6   # delay čekání
 
     for ((i=1; i<=retries; i++)); do
         # Fetch whois data
-        whois_data=$(whois "$domain")
+        whois_data=$(proxychains whois "$domain")
 
         # Check for connection limit exceeded
         if echo "$whois_data" | grep -q "Your connection limit exceeded"; then
-            echo -e "${RED}WHOIS limit, zkusím to znovu za $delay vteřin${NC}"
+            echo -e "<small class="pokusy">Počet WHOIS pokusů: #$i</small>"
             for ((d=delay; d>=0; d--)); do
-                echo "$d"
                 sleep 1
             done
         else
@@ -77,28 +73,36 @@ fetch_whois() {
                 fi
 
                 if [[ $statusDomeny == "Expired" ]]; then
-                    expiraceStatus="${RED} - DOMENA JE PO EXPIRACI"
+                    expiraceStatus=" - <span class="red">DOMENA JE PO EXPIRACI</span>"
                 elif [[ $brzyExpiruje == true ]]; then
-                    expiraceStatus="${RED} - BRZY EXPIRUJE"
+                    expiraceStatus=" - <span class="red">BRZY EXPIRUJE</span>"
                 else
-                    expiraceStatus="${GREEN} - OK"
+                    expiraceStatus="- <span class="green">OK</span>"
                 fi
 
                 if [[ $dnssec == "" ]]; then
-                    dnssec="${NC}OFF"
+                    dnssec="OFF"
                 else
-                    dnssec="${GREEN}ON"
+                    dnssec="<span class="green">ON</span>"
                 fi
 
-                # Output the results
-                echo -e "${YELLOW}TLD domény:${NC} $tld"
-                echo -e "${YELLOW}DNSSEC: ${NC}$dnssec"
-                echo -e "${YELLOW}Vlastník domény: ${NC}$vlastnik"
-                echo -e "${YELLOW}Registrátor kontaktu: ${NC}$registratorKontaktu"
-                echo -e "${YELLOW}Jméno a příjmení vlastníka: ${NC}$jmenoVlastnika"
-                echo -e "${YELLOW}Registrátor domény: ${NC}$(highlight_if_match "$registrator" "$ch_registrator")"
-                echo -e "${YELLOW}Registrováno: ${NC}$registrovano"
-                echo -e "${YELLOW}Expiruje: ${NC}$expiruje $expiraceStatus"
+                # Output HTML
+cat <<EOF
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <p><strong>TLD domény:</strong> $tld</p>
+                <p><strong>DNSSEC:</strong> $dnssec</p>
+                <p><strong>Vlastník domény:</strong> $vlastnik</p>
+                <p><strong>Registrátor kontaktu:</strong> $registratorKontaktu</p>
+                <p><strong>Jméno a příjmení vlastníka:</strong> $jmenoVlastnika</p>
+                <p><strong>Registrátor domény:</strong> $(highlight_if_match "$registrator" "$ch_registrator")</p>
+                <p><strong>Registrováno:</strong> $registrovano</p>
+                <p><strong>Expiruje:</strong> $expiruje $expiraceStatus</p>
+            </div>
+
+EOF
+
 
             elif [[ "$tld" == "com" ]]; then
                 # Extract the relevant information
@@ -109,48 +113,36 @@ fetch_whois() {
                 statusDomeny=$(echo "$whois_data" | grep -iE 'Domain Status' | head -n 1 | sed 's/Domain Status: *//I' | xargs)
 
 				if [[ "$statusDomeny" == *"clientTransferProhibited"* ]]; then
-					statusDomeny="${RED} Doménu nelze převést"
+					statusDomeny=" <span class="red">Doménu nelze převést</span>"
 				elif [[ "$statusDomeny" == *"clientRenewProhibited"* ]]; then
-					statusDomeny="${RED} Doménu nelze prodloužit"
+					statusDomeny=" <span class="red">Doménu nelze prodloužit</span>"
 				elif [[ "$statusDomeny" == *"ok"* ]]; then
-					statusDomeny="${GREEN} Doménu lze převést"
+					statusDomeny=" <span class="green">Doménu lze převést</span>"
 				else
-					statusDomeny="${RED} Status se nepodařilo zjistit."
+					statusDomeny=" <span class="red">Status se nepodařilo zjistit.</span>"
 				fi
-				
-                # Output the results
-                echo -e "${YELLOW}TLD domény:${NC} $tld"
-                echo -e "${YELLOW}Status domény:${NC} $statusDomeny"
-                echo -e "${YELLOW}DNSSEC: ${NC}$dnssec"
-                echo -e "${YELLOW}Registrátor domény: ${NC}$(highlight_if_match "$registrator" "$ch_registrator")"
-                echo -e "${YELLOW}Registrováno: ${NC}$registrovano"
-                echo -e "${YELLOW}Expiruje: ${NC}$expiruje"
+
+                echo -e "TLD domény: $tld"
 			elif [[ $"$tld" == "eu" ]]; then
-				# Extract the relevant information
-				# .eu domeny nam reknou velky prd pres whois
-                # Output the results
-                echo -e "${YELLOW}TLD domény:${NC} $tld"
+                echo -e "TLD domény: $tld"
             else
-                echo -e "${YELLOW}Tahle koncovka není podporována pro whois informace."
+                echo -e "Tahle koncovka není podporována pro whois informace."
             fi
 
             # Exit the loop since the WHOIS data was successfully fetched
             return 0
         fi
+            # Check if it's the last retry
+        if [ "$i" -eq "$retries" ]; then
+        echo -e "WHOIS selhal již $retries pokusů, skript se ukončí."
+        exit 1  # Exit with a non-zero status to indicate failure
+        fi
     done
-
-    # If retries exhausted, show failure message
-    if [[ $i -eq retries ]]; then
-        echo -e "${RED}WHOIS selhal již $retries pokusů, skript se ukončí.${NC}"
-        return 1
-    fi
 }
-
-
 
 # Function to fetch Nameservers
 fetch_nameservers() {
-    echo -e "${YELLOW}Nameservery:${NC}"
+    echo -e "<div class="col-sm"><h3>Nameservery:</h3>"
     ns_data=$(host -t ns $domain | awk '{print $4}' | xargs)
     for ns in $ns_data; do
 	match_found=false
@@ -162,49 +154,53 @@ fetch_nameservers() {
    done
 
    if [[ $match_found == true ]]; then
-	echo -e "${GREEN}$ns${NC}"
+	echo -e "<p class="green">$ns</p>"
    else
-	echo -e "${RED}$ns${NC}"
+	echo -e "<p class="red">$ns</p>"
    fi
  done
 }
 
 # Function to fetch A records
 fetch_a_records() {
-    echo -e "${YELLOW}A Záznamy:${NC}"
+    echo -e "<h3>A Záznamy:</h3>"
     a_records=$(host -t a $domain | grep "has address" | awk '{print $4}')
 	for ip in $a_records; do
 		if [[ "$ip" == "$ch_wildcard"* ]]; then
-			echo -e "${GREEN}$ip${NC}"
+			whois_a_record=$(whois $ip)
+			vlastnik=$(echo "$whois_a_record" | grep -iE 'org-name' | head -n 1 | sed 's/org-name: *//I')
+			echo -e "<p class="green">$ip</p>"
 		else
-			echo -e "${RED}$ip${NC}"
+			whois_a_record=$(whois $ip)
+			vlastnik=$(echo "$whois_a_record" | grep -iE 'org-name' | head -n 1 | sed 's/org-name: *//I')
+			echo -e "<p class="red">$ip ($vlastnik)</p>"
 		fi
 
        done
 }
 
 fetch_aaaa_records() {
-    echo -e "${YELLOW}AAAA Záznamy (IPv6):${NC}"
+    echo -e "<h3>AAAA Záznamy (IPv6):</h3>"
     aaaa_records=$(host -t aaaa $domain | grep "has IPv6 address" | awk '{print $5}' | xargs)
 	for ipv6 in $aaaa_records; do
 		if [[ "$ipv6" == "$ch_ipv6_wildcard"* ]]; then
-			echo -e "${GREEN}$ipv6${NC}"
+			echo -e "<p class="green">$ipv6</p>"
 		else
-			echo -e "${RED}$ipv6${NC}"
+			echo -e "<p class="red">$ipv6</p>"
 		fi
 	done
 }
 
 fetch_txt_records() {
-    echo -e "${YELLOW}TXT Záznamy:${NC}"
+    echo -e "</div><div class="col-sm"><h3>TXT Záznamy:</h3>"
     dig txt $domain +short | while IFS= read -r line; do
-        echo -e "$line\n"
+        echo -e "<p>$line</p>\n"
     done
 }
 
 # Function to fetch MX records
 fetch_mx_records() {
-    echo -e "${YELLOW}MX Záznamy (Pošta):${NC}"
+    echo -e "<h3>MX Záznamy (Pošta):</h3>"
     mx_records=$(host -t mx $domain | awk '{print $7}')
 	for mx in $mx_records; do
 		match_found=false
@@ -216,15 +212,16 @@ fetch_mx_records() {
 		done
 
 		if [[ $match_found == true ]]; then
-			echo -e "${GREEN}$mx${NC}"
+			echo -e "<p class="green">$mx</p>"
 		else
-			echo -e "${RED}$mx${NC}"
+			echo -e "<p class="red">$mx</p>"
 		fi
 	done
+	echo -e "</div></div>"
 }
 
 # Fetch information
-fetch_whois >> $LOG
+fetch_whois > $LOG
 echo ""
 fetch_nameservers >> $LOG
 echo ""
@@ -235,5 +232,3 @@ echo ""
 fetch_txt_records >> $LOG
 echo ""
 fetch_mx_records >> $LOG
-
-fi

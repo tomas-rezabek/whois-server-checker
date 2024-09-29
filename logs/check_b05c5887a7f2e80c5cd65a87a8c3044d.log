@@ -1,0 +1,37 @@
+
+    <p>Všechny <span class="green">ZELENÉ</span> hodnoty patří Českému hostingu a všechny <span class="red">ČERVENÉ</span> jsou cizí.</p>
+    <p>Skript kontroluje zda .cz domena v nasledujicich 14 dnech expiruje a nebo jestli je již po expiraci.</p>
+    <h3 class="my-4">Výsledek pro doménu: <span class="yellow"><strong>jahoda.cz</strong></span></h3>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <p><strong>TLD domény:</strong> cz</p>
+                <p><strong>DNSSEC:</strong> OFF</p>
+                <p><strong>Vlastník domény:</strong> SB:SDRUZENI_JAHODA</p>
+                <p><strong>Registrátor kontaktu:</strong> REG-ACTIVE24</p>
+                <p><strong>Jméno a příjmení vlastníka:</strong> Tomáš Jindříšek</p>
+                <p><strong>Registrátor domény:</strong> <span class=red>REG-WEDOS</span></p>
+                <p><strong>Registrováno:</strong> 01.03.2001 17:34:00</p>
+                <p><strong>Expiruje:</strong> 09.03.2025 - <span class=green>OK</span></p>
+            </div>
+
+<div class=col-sm><h3>Nameservery:</h3>
+<p class=red>ns.wedos.com.</p>
+<p class=red>ns.wedos.net.</p>
+<p class=red>ns.wedos.cz.</p>
+<p class=red>ns.wedos.eu.</p>
+<h3>A Záznamy:</h3>
+<p class=red>62.109.150.58</p>
+<h3>AAAA Záznamy (IPv6):</h3>
+</div><div class=col-sm><h3>TXT Záznamy:</h3>
+<p>"v=spf1 include:_spf.webglobe.cz include:_spf.google.com ip4:95.168.198.199 ~all"</p>
+
+<p>"TTL@MS=BD3FF9D71FBF5D990970FB2935C4DA035722047B3600"</p>
+
+<h3>MX Záznamy (Pošta):</h3>
+<p class=red>alt2.aspmx.l.google.com.</p>
+<p class=red>alt3.aspmx.l.google.com.</p>
+<p class=red>alt4.aspmx.l.google.com.</p>
+<p class=red>aspmx.l.google.com.</p>
+<p class=red>alt1.aspmx.l.google.com.</p>
+</div></div>
