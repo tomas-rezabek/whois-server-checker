@@ -50,7 +50,7 @@ EOF
         else
             # Extract the TLD
             tld="${domain##*.}"
-
+            
             if [[ "$tld" == "cz" ]]; then
                 # Extract the relevant information
                 vlastnik=$(echo "$whois_data" | grep -iE 'registrant' | head -n 1 | sed 's/registrant: *//I')
@@ -85,7 +85,11 @@ EOF
                 else
                     dnssec="<span class="green">ON</span>"
                 fi
-
+                if [[ $vlastnik == "" ]]; then
+                    echo -e "<h3>Doména <span class="yellow">$domain</span> neexistuje.</h3"
+                    exit 1
+                fi
+                    
                 # Output HTML
 cat <<EOF
     <div class="container">

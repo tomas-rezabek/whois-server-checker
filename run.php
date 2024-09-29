@@ -23,14 +23,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bindParam(':ip_address', $userIP);
         $stmt->bindParam(':session_id', $userID);
 
-        if ($stmt->execute()) {
+        try {
+            $stmt->execute();
             // Ensure the command is escaped properly
 	        $prikaz = "bash check.sh " . escapeshellarg($domain) . " " . escapeshellarg($log) . " 2>&1";
             shell_exec($prikaz);
             echo json_encode(['status' => 'success', 'message' => 'Doména v pořádku přidána.', 'log' => $log]);
-        } else {
+        } catch (PDOException $e) {
             // Show error message if the insert fails
-            echo json_encode(['status' => 'error', 'message' => 'Error: ']);
+            echo json_encode(['status' => 'error', 'message' => 'Error: ' . $e->getMessage()]);
         }
 
     } else {
