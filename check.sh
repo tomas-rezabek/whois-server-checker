@@ -39,7 +39,7 @@ EOF
 
     for ((i=1; i<=retries; i++)); do
         # Fetch whois data
-        whois_data=$(proxychains whois "$domain")
+        whois_data=$(whois "$domain")
 
         # Check for connection limit exceeded
         if echo "$whois_data" | grep -q "Your connection limit exceeded"; then

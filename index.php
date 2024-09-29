@@ -47,6 +47,7 @@ function executeScript(domain) {
             hideLoading();
             if (this.status === 200) {
                 try {
+                    console.log("Raw: ", this.responseText)
                     const response = JSON.parse(this.responseText);
                     loadData(response.log); // assuming response.log is the correct path
                 } catch (error) {

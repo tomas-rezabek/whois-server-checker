@@ -1,0 +1,32 @@
+    <h2>Vysvětlivka</h2>
+    <p>Všechny <span class="green">ZELENÉ</span> hodnoty patří Českému hostingu a všechny <span class="red">ČERVENÉ</span> jsou cizí.</p>
+    <h3>Výsledek pro doménu: <span class="yellow"><strong>test.cz</strong></span></h3>
+<small class=pokusy>Počet WHOIS pokusů: #1</small>
+<small class=pokusy>Počet WHOIS pokusů: #2</small>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <p><strong>TLD domény:</strong> cz</p>
+                <p><strong>DNSSEC:</strong> <span class=green>ON</span></p>
+                <p><strong>Vlastník domény:</strong> WEDOS-CHV-404924</p>
+                <p><strong>Registrátor kontaktu:</strong> REG-WEDOS</p>
+                <p><strong>Jméno a příjmení vlastníka:</strong> Eduarda Hekšová</p>
+                <p><strong>Registrátor domény:</strong> <span class=red>REG-WEDOS</span></p>
+                <p><strong>Registrováno:</strong> 17.02.1998 01:00:00</p>
+                <p><strong>Expiruje:</strong> 06.10.2025 - <span class=green>OK</span></p>
+            </div>
+
+<div class=col-sm><h3>Nameservery:</h3>
+<p class=red>ns.wedos.eu.</p>
+<p class=red>ns.wedos.com.</p>
+<p class=red>ns.wedos.net.</p>
+<p class=red>ns.wedos.cz.</p>
+<h3>A Záznamy:</h3>
+<p class=red>185.175.8.140 ()</p>
+<h3>AAAA Záznamy (IPv6):</h3>
+</div><div class=col-sm><h3>TXT Záznamy:</h3>
+<p>"v=spf1 -all"</p>
+
+<h3>MX Záznamy (Pošta):</h3>
+<p class=red>mx.test.cz.</p>
+</div></div>
