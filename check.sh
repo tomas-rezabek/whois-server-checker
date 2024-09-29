@@ -175,7 +175,11 @@ fetch_a_records() {
 		else
 			whois_a_record=$(whois $ip)
 			vlastnik="($(echo "$whois_a_record" | grep -iE 'org-name' | head -n 1 | sed 's/org-name: *//I'))"
-			echo -e "<p class="red">$ip $vlastnik</p>"
+			if [[ $vlastnik -ne "" ]]; then
+                echo -e "<p class="red">$ip $vlastnik</p>"
+            else
+                echo -e "<p class="red">$ip <small>- Vlastník IP nerozpoznán</small></p>"
+            fi 
 		fi
 
        done

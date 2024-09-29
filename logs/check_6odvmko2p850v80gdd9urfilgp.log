@@ -1,35 +1,31 @@
     <h2>Vysvětlivka</h2>
     <p>Všechny <span class="green">ZELENÉ</span> hodnoty patří Českému hostingu a všechny <span class="red">ČERVENÉ</span> jsou cizí.</p>
-    <h3>Výsledek pro doménu: <span class="yellow"><strong>thinline.cz</strong></span></h3>
+    <h3>Výsledek pro doménu: <span class="yellow"><strong>minecraft.cz</strong></span></h3>
+<small class=pokusy>Počet WHOIS pokusů: #1</small>
     <div class="container">
         <div class="row">
             <div class="col-sm">
                 <p><strong>TLD domény:</strong> cz</p>
-                <p><strong>DNSSEC:</strong> <span class=green>ON</span></p>
-                <p><strong>Vlastník domény:</strong> THINLINE</p>
-                <p><strong>Registrátor kontaktu:</strong> REG-THINLINE</p>
-                <p><strong>Jméno a příjmení vlastníka:</strong> Matěj Kloubek</p>
-                <p><strong>Registrátor domény:</strong> <span class=green>REG-THINLINE</span></p>
-                <p><strong>Registrováno:</strong> 08.01.2002 17:31:00</p>
-                <p><strong>Expiruje:</strong> 09.01.2030 - <span class=green>OK</span></p>
+                <p><strong>DNSSEC:</strong> OFF</p>
+                <p><strong>Vlastník domény:</strong> POHO</p>
+                <p><strong>Registrátor kontaktu:</strong> REG-MOJEID</p>
+                <p><strong>Jméno a příjmení vlastníka:</strong> Ondřej Pohorský</p>
+                <p><strong>Registrátor domény:</strong> <span class=red>REG-GRANSY</span></p>
+                <p><strong>Registrováno:</strong> 20.11.2019 15:00:18</p>
+                <p><strong>Expiruje:</strong> 20.11.2025 - <span class=green>OK</span></p>
             </div>
 
 <div class=col-sm><h3>Nameservery:</h3>
-<p class=green>ns2.thinline.cz.</p>
-<p class=green>ns3.cesky-hosting.eu.</p>
-<p class=green>ns1.thinline.cz.</p>
+<p class=red>ns.vas-hosting.eu.</p>
+<p class=red>ns.vas-hosting.cz.</p>
+<p class=red>ns.vas-hosting.com.</p>
 <h3>A Záznamy:</h3>
-<p class=green>91.239.200.50</p>
+<p class=red>46.234.112.73 <small>- Vlastník IP nerozpoznán</small></p>
 <h3>AAAA Záznamy (IPv6):</h3>
-<p class=green>2001:67c:e94:0:1:5bef:c832:1</p>
+<p class=red>2a01:28:ca:112::1:849</p>
 </div><div class=col-sm><h3>TXT Záznamy:</h3>
-<p>"MS=0889D6A859FA7C1B1DCADE869AEE2040D7BC7EE3"</p>
-
-<p>"google-site-verification=dkUEY5vad4QSMnl5qoTKNUxDvtXhkHhqBTl92gwUabk"</p>
-
-<p>"v=spf1 ip4:78.44.7.2 ip4:91.239.200.0/22 ip4:88.101.155.139 ip4:82.100.6.0/24 ip6:2a00:1ed0:2:0::/48 ip6:2001:4de8:015a::/48 ip6:2001:4de8:fa22::/48 ip6:2002:4e2c:fe7c::/48 ip6:2001:67c:e94::/48 -all"</p>
+<p>"v=spf1 a mx ?all"</p>
 
 <h3>MX Záznamy (Pošta):</h3>
-<p class=green>mx1b20.thinline.cz.</p>
-<p class=green>mx1d10.thinline.cz.</p>
+<p class=red>bur02.vas-server.cz.</p>
 </div></div>
