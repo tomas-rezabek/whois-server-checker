@@ -89,8 +89,6 @@
         status.innerHTML = "Neplatný formát domény, použij <q>domena.cz</q>";
       } else {
         status.classList.remove("alert-warning", "alert-danger");
-        status.classList.add("alert-success");
-        status.innerHTML = "OK!"
         const reset = () => {
           document.getElementById("domena").value = "";
         }
