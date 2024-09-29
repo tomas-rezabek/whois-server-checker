@@ -171,13 +171,11 @@ fetch_a_records() {
     a_records=$(host -t a $domain | grep "has address" | awk '{print $4}')
 	for ip in $a_records; do
 		if [[ "$ip" == "$ch_wildcard"* ]]; then
-			whois_a_record=$(whois $ip)
-			vlastnik=$(echo "$whois_a_record" | grep -iE 'org-name' | head -n 1 | sed 's/org-name: *//I')
 			echo -e "<p class="green">$ip</p>"
 		else
 			whois_a_record=$(whois $ip)
-			vlastnik=$(echo "$whois_a_record" | grep -iE 'org-name' | head -n 1 | sed 's/org-name: *//I')
-			echo -e "<p class="red">$ip ($vlastnik)</p>"
+			vlastnik="($(echo "$whois_a_record" | grep -iE 'org-name' | head -n 1 | sed 's/org-name: *//I'))"
+			echo -e "<p class="red">$ip $vlastnik</p>"
 		fi
 
        done

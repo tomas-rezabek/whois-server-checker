@@ -1,39 +1,35 @@
     <h2>Vysvětlivka</h2>
     <p>Všechny <span class="green">ZELENÉ</span> hodnoty patří Českému hostingu a všechny <span class="red">ČERVENÉ</span> jsou cizí.</p>
-    <h3>Výsledek pro doménu: <span class="yellow"><strong>ahoj.cz</strong></span></h3>
-<small class=pokusy>Počet WHOIS pokusů: #1</small>
-<small class=pokusy>Počet WHOIS pokusů: #2</small>
-<small class=pokusy>Počet WHOIS pokusů: #3</small>
-<small class=pokusy>Počet WHOIS pokusů: #4</small>
-<small class=pokusy>Počet WHOIS pokusů: #5</small>
+    <h3>Výsledek pro doménu: <span class="yellow"><strong>thinline.cz</strong></span></h3>
     <div class="container">
         <div class="row">
             <div class="col-sm">
                 <p><strong>TLD domény:</strong> cz</p>
-                <p><strong>DNSSEC:</strong> OFF</p>
-                <p><strong>Vlastník domény:</strong> SB:EMEATELECOM</p>
-                <p><strong>Registrátor kontaktu:</strong> REG-WEBGLOBE</p>
-                <p><strong>Jméno a příjmení vlastníka:</strong> Martina Vítková</p>
-                <p><strong>Registrátor domény:</strong> <span class=red>REG-WEBGLOBE</span></p>
-                <p><strong>Registrováno:</strong> 28.04.1998 02:00:00</p>
-                <p><strong>Expiruje:</strong> 11.10.2025 - <span class=green>OK</span></p>
+                <p><strong>DNSSEC:</strong> <span class=green>ON</span></p>
+                <p><strong>Vlastník domény:</strong> THINLINE</p>
+                <p><strong>Registrátor kontaktu:</strong> REG-THINLINE</p>
+                <p><strong>Jméno a příjmení vlastníka:</strong> Matěj Kloubek</p>
+                <p><strong>Registrátor domény:</strong> <span class=green>REG-THINLINE</span></p>
+                <p><strong>Registrováno:</strong> 08.01.2002 17:31:00</p>
+                <p><strong>Expiruje:</strong> 09.01.2030 - <span class=green>OK</span></p>
             </div>
 
 <div class=col-sm><h3>Nameservery:</h3>
-<p class=red>ns.nwt.cz.</p>
-<p class=red>ns2.nwt.cz.</p>
+<p class=green>ns2.thinline.cz.</p>
+<p class=green>ns3.cesky-hosting.eu.</p>
+<p class=green>ns1.thinline.cz.</p>
 <h3>A Záznamy:</h3>
-<p class=red>92.61.83.162 ()</p>
+<p class=green>91.239.200.50</p>
 <h3>AAAA Záznamy (IPv6):</h3>
+<p class=green>2001:67c:e94:0:1:5bef:c832:1</p>
 </div><div class=col-sm><h3>TXT Záznamy:</h3>
-<p>"google-gws-recovery-domain-verification=40985480"</p>
+<p>"MS=0889D6A859FA7C1B1DCADE869AEE2040D7BC7EE3"</p>
+
+<p>"google-site-verification=dkUEY5vad4QSMnl5qoTKNUxDvtXhkHhqBTl92gwUabk"</p>
+
+<p>"v=spf1 ip4:78.44.7.2 ip4:91.239.200.0/22 ip4:88.101.155.139 ip4:82.100.6.0/24 ip6:2a00:1ed0:2:0::/48 ip6:2001:4de8:015a::/48 ip6:2001:4de8:fa22::/48 ip6:2002:4e2c:fe7c::/48 ip6:2001:67c:e94::/48 -all"</p>
 
 <h3>MX Záznamy (Pošta):</h3>
-<p class=red>alt1.aspmx.l.google.com.</p>
-<p class=red>alt2.aspmx.l.google.com.</p>
-<p class=red>aspmx2.googlemail.com.</p>
-<p class=red>aspmx3.googlemail.com.</p>
-<p class=red>aspmx4.googlemail.com.</p>
-<p class=red>aspmx5.googlemail.com.</p>
-<p class=red>aspmx.l.google.com.</p>
+<p class=green>mx1b20.thinline.cz.</p>
+<p class=green>mx1d10.thinline.cz.</p>
 </div></div>
