@@ -31,7 +31,7 @@ fetch_whois() {
     cat<<EOF
     <h2>Vysvětlivka</h2>
     <p>Všechny <span class="green">ZELENÉ</span> hodnoty patří Českému hostingu a všechny <span class="red">ČERVENÉ</span> jsou cizí.</p>
-    <h3>Výsledek pro doménu: <span class="yellow"><strong>$domain</strong></span></h3>
+    <h3 class="my-4">Výsledek pro doménu: <span class="yellow"><strong>$domain</strong></span></h3>
 EOF
 
     retries=6 # počet pokusů
