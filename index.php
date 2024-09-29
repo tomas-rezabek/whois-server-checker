@@ -26,40 +26,41 @@
   </div>
   <script src="gifs.js"></script>
   <script>
-function showLoading() {
-    const loadingElement = document.getElementById("loading");
-    const randomCislo = Math.floor(Math.random() * gifs.length);
-    const vybranyGif = gifs[randomCislo];
-    loadingElement.innerHTML = `<h3><strong>Čekám na WHOIS ...</strong></h3><br><img src="${vybranyGif}" alt="Čekám na WHOIS ..." width="256" height="256" frameBorder="0">`
-    loadingElement.style.display = "block"; // Show loading element
-}
+    function showLoading() {
+      const loadingElement = document.getElementById("loading");
+      const randomCislo = Math.floor(Math.random() * gifs.length);
+      const vybranyGif = gifs[randomCislo];
+      loadingElement.innerHTML = `<h3><strong>Čekám na WHOIS ...</strong></h3><br><img src="${vybranyGif}" alt="Čekám na WHOIS ..." width="256" height="256" frameBorder="0">`
+      loadingElement.style.display = "block"; // Show loading element
+    }
 
-function hideLoading() {
-    document.getElementById("loading").style.display = "none"; // Hide loading element
-}
-function executeScript(domain) {
-    showLoading();
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", "run.php", true);
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.onreadystatechange = function() {
+    function hideLoading() {
+      document.getElementById("loading").style.display = "none"; // Hide loading element
+    }
+
+    function executeScript(domain) {
+      showLoading();
+      const xhr = new XMLHttpRequest();
+      xhr.open("POST", "run.php", true);
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      xhr.onreadystatechange = function() {
         if (this.readyState === XMLHttpRequest.DONE) {
-            hideLoading();
-            if (this.status === 200) {
-                try {
-                    console.log("Raw: ", this.responseText)
-                    const response = JSON.parse(this.responseText);
-                    loadData(response.log); // assuming response.log is the correct path
-                } catch (error) {
-                    console.error("Failed to parse JSON:", error);
-                }
-            } else {
-                console.error("Neco se pokazilo:", this.status);
+          hideLoading();
+          if (this.status === 200) {
+            try {
+              // console.log("Raw: ", this.responseText) - uzitectne jen na debugging
+              const response = JSON.parse(this.responseText);
+              loadData(response.log);
+            } catch (error) {
+              console.error("Failed to parse JSON:", error);
             }
+          } else {
+            console.error("Neco se pokazilo:", this.status);
+          }
         }
-    };
-    xhr.send('domena=' + encodeURIComponent(domain));
-}
+      };
+      xhr.send('domena=' + encodeURIComponent(domain));
+    }
 
     function loadData(log) {
       const xhttp = new XMLHttpRequest();
@@ -81,7 +82,7 @@ function executeScript(domain) {
         status.style.display = "block";
         status.classList.remove("alert-danger");
         status.classList.add("alert-warning");
-        status.innerHTML = "Je potřeba vyplnit doménu";
+        status.innerHTML = "Je potřeba vyplnit doménu.";
       } else if (!/^[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/.test(input)) {
         status.style.display = "block";
         status.classList.add("alert-danger");
@@ -89,26 +90,15 @@ function executeScript(domain) {
       } else {
         status.classList.remove("alert-warning", "alert-danger");
         status.classList.add("alert-success");
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', 'takeDomain.php', true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.onreadystatechange = function() {
-          if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-              document.getElementById("result").innerHTML = xhr.responseText;
-            } else {
-              document.getElementById("result").innerHTML = "Něco se pokazilo";
-            }
-          }
-        };
-        xhr.send('domena=' + encodeURIComponent(input));
+        status.innerHTML = "OK!"
         const reset = () => {
           document.getElementById("domena").value = "";
         }
-	executeScript(input);
+        executeScript(input);
         reset();
       };
     });
   </script>
 </body>
+
 </html>
